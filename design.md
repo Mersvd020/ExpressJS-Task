@@ -1,0 +1,98 @@
+## task1 : Task Manager (no database,no UI,backendOnly)
+
+## resource:
+ 
+ id: Integer (unique,server generate it with crypto)
+ title : string (name of task)
+ completed : boolean (default false)
+ createdAt : string (ISOdate,server generate it with new Date())
+ 
+  example:
+    {
+        id: 1,
+        title : "task1",
+        completed : false,
+        createdAt : "2026-08-27T14:42:54.541Z" 
+    }
+
+   request example:
+     {
+        title: "task1",
+     } 
+
+## package installed
+ -nodemon (for fast debuging in development)
+ -multer (for upload file(image))
+ -exprss.js (for writing rest api)
+
+
+## folder structure:
+
+|-controller
+|  |
+|  |_taskController.js (functions for handling get,create,edit and delete)
+| 
+|-data
+|  |
+|  |_task.json (storage for saving data)
+|
+|-routes
+|  |
+|  |_taskRoute.js (route api)
+|
+|-uploads
+|  |
+|  |_(image.png/jpg)
+|
+|-util
+|   |
+|   |_files.util.js (file for uploading files(image) with multer package)
+|
+|_app.js (main file for running server)
+
+## api routes
+
+base url: /api/task
+
+get all task:
+ method : get,
+ route : /
+ status code : 200 (success) , 404(not found) , 500(server error)
+
+get a specific task:
+ method : get
+ route : /:id
+ status code : 200(success) , 400(bad request) , 404(not found) , 500 (server error) 
+
+create task:
+ method : post
+ route : /
+ status code : 201(created) , 400(bad request) , 500 (server error)
+
+edit task:
+ method : patch
+ route : /edit/:id
+ status code : 200(success) , 400(bad request) , 404(not found) , 500(server error)
+
+isCompleted task (completed:true):
+ method : patch
+ route : /completed/:id
+ status code : 200(success) , 404(not found) , 500(server error)
+
+delete a task :
+ method : delete
+ route : /:id
+ status code : 200(success) , 404(not found) , 500(server error)   
+
+
+## questions
+
+1. Why might you split "routes" from "controllers" instead of writing logic directly in the route file?
+    because programmer isnt a person who just wirte Logic. must prevent repeating 
+    and write logic which can refactor it and use in all part api needed.
+    and when project become larger, can manage it. 
+
+2. If someone requests a task that doesn't exist, what should happen? What status code, and why not just 200?
+  when there is no task, server return 404 status code which tell  client this task doesnt exit
+  in most time when you use 404 status code when client want look the task with unique resourse like id ,
+  edit and delete task. when task doesnt exit with this id must return 404.
