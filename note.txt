@@ -1,0 +1,12 @@
+bugs:
+
+ 1-input check for title
+   title must be string for that i use =>  if(typeof title != string)
+    but it give error. and i take export in response => type:typeof title ;
+    and it give me "string" and  i fix the bug => if(typeof title !== "string");
+   and it worked.
+
+  2- make id to Number in editTask
+    i forget to make id to Number , because id in params was string
+    and i give it to task without make it number and edited task had 
+    id but typeof string. i fix it with id:Number(id)  
