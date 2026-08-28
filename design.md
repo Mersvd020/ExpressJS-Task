@@ -6,19 +6,30 @@
  title : string (name of task)
  completed : boolean (default false)
  createdAt : string (ISOdate,server generate it with new Date())
+
+ new feild:
+file: file (for upload file) 
+attachmentPath : string (URLpath of task files).
  
   example:
     {
         id: 1,
         title : "task1",
         completed : false,
+        attachmentPath:http://localhost:3000/api/tasks/file/filename.png,
         createdAt : "2026-08-27T14:42:54.541Z" 
     }
 
-   request example:
+   request example in body:
      {
-        title: "task1",
+        "title": "task1",
      } 
+
+   request for file in form :
+     
+     file: (file.png/jpg/pdf);
+     
+
 
 ## package installed
  -nodemon (for fast debuging in development)
@@ -42,11 +53,11 @@
 |
 |-uploads
 |  |
-|  |_(image.png/jpg)
+|  |_(image.png/jpg/pdf)
 |
 |-util
 |   |
-|   |_files.util.js (file for uploading files(image) with multer package)
+|   |_files.util.js (file for uploading files(image/pdf/video) with multer package)
 |
 |_app.js (main file for running server)
 
@@ -79,12 +90,17 @@ isCompleted task (completed:true):
  route : /completed/:id
  status code : 200(success) , 404(not found) , 500(server error)
 
+upload task file (completed:true):
+ method:patch
+ route : /:id/file
+ status code : 200(success),404(not found (the task)), 400 (bad request) , 500(server error) 
+
 delete a task :
  method : delete
  route : /:id
  status code : 200(success) , 404(not found) , 500(server error)   
 
-
+ 
 ## questions stage 1
 
 1. Why might you split "routes" from "controllers" instead of writing logic directly in the route file?
@@ -123,3 +139,17 @@ delete a task :
      if(!theRecord) return res.status(404).json({message:"task not found"})
 
   ```````
+
+## question stage 3
+
+ 1. Your API lives at `/api/tasks` and your static files are served at `/files`. How does Express decide which handler responds to a given request? What would happen if these two paths overlapped?
+  the urlroute is diffrent and for /files backend just do method: get.
+  
+
+2. If someone requests a file that doesn't exist in `uploads/`, what does `express.static()` do by default? Try it and observe.
+
+  give error for example => Cannot GET /uploads/1787919309561.JPG
+
+3. Should the `uploads/` folder be publicly listable (i.e. can someone see all filenames just by browsing)? What does that mean for how you name files? 
+ i dont just name file date.now() + file.originalname and it save in folder uploads
+ and for access to it just for observe client must enter serverAddress/uploads/filename
