@@ -1,0 +1,289 @@
+{
+	"info": {
+		"_postman_id": "a4ff1b45-16fd-41fd-bfde-a7f2d6bc318b",
+		"name": "task1-stage2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "49187642",
+		"_collection_link": "https://mosaybimersvd020-6774566.postman.co/workspace/Mersvd-Mosaybi's-Workspace~722c0c33-a9d9-46b3-8fc4-463dc8209cf1/collection/49187642-a4ff1b45-16fd-41fd-bfde-a7f2d6bc318b?action=share&source=collection_link&creator=49187642"
+	},
+	"item": [
+		{
+			"name": "createTask",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "content-type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\":\"task with file\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/tasks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"tasks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAlltask",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/tasks?completed=booldean&search=string&limit=number&page=number",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"tasks"
+					],
+					"query": [
+						{
+							"key": "completed",
+							"value": "booldean"
+						},
+						{
+							"key": "search",
+							"value": "string"
+						},
+						{
+							"key": "limit",
+							"value": "number"
+						},
+						{
+							"key": "page",
+							"value": "number"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getTaskById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/tasks/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"tasks",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "594"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "editTask",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "content-type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"dwa\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/tasks/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"tasks",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "594"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "isCompleteTask",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "content-type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/tasks/completed/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"tasks",
+						"completed",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "594"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "toggleCompleteTask",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/tasks/:id/toggle",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"tasks",
+						":id",
+						"toggle"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "number"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteTask",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "content-type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"wad\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/tasks/:id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"tasks",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "594"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "uploadTaskFile",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/C:/Users/mosay/Pictures/PIC/avatar/IMG_2917.JPG"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/tasks/:id/file",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"tasks",
+						":id",
+						"file"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "549"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

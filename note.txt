@@ -10,3 +10,9 @@ bugs:
     i forget to make id to Number , because id in params was string
     and i give it to task without make it number and edited task had 
     id but typeof string. i fix it with id:Number(id)  
+
+// read and write in stage4
+
+ i learn read and write from overflow: 
+ https://stackoverflow.com/questions/70338830/how-to-write-to-a-array-in-json-file-without-replacing-the-entire-file
+ https://stackoverflow.com/questions/64655643/how-to-read-write-to-a-json-file-in-node-js
