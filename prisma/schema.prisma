@@ -29,6 +29,7 @@ model Product{
    description String
    create_at DateTime @default(now())
    price Int
+   stock Int
    categories Category[]
    images ProductImage[]
    favorites Favorite[]

@@ -13,6 +13,7 @@ const userRegister_Validate = [
     body("password")
     .isString()
     .isLength({min:8}).withMessage("password must be at least 8 characters")
+
 ]
 
 const userLogin_Validate = [  

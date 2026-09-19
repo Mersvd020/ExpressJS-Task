@@ -20,6 +20,7 @@
    |  description : String (text that contain specifications of the product)
    |  create_at : String (iso Date)
    |  price : Number (Integer)
+   |  stock : Number (Integer)
    |  images : Array (ProductImage[])
    |  categories : Array (Category[])
    |  
@@ -65,6 +66,7 @@
 |  |_user_Controller.js 
 |  |_product_Controller.js 
 |  |_image_Controller.js
+|  |_category_Controller.js
 |
 |-data (database folder)
 |  |
