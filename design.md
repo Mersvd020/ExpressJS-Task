@@ -98,6 +98,8 @@
 |   |
 |   |_image.util.js (for saving image)
 |   |_prisma.util.js 
+|   |_hash.util.js
+|   |_token.util.js
 |
 |-validation
 |   |
