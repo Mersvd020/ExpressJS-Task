@@ -83,8 +83,9 @@
 |    
 |-routes (api`s route)
 |  |
-|  |_user_Route.js 
-|  |_product_Route.js 
+|  |_user_route.js 
+|  |_product_route.js 
+|  |_category_route.js
 | 
 | 
 |
@@ -107,6 +108,7 @@
 |   |
 |   |_user_Validate.js
 |   |_product_Validate.js
+|   |_category_Validate.js
 |
 |
 |_app.js (main file for running server)

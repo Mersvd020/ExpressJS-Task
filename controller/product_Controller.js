@@ -13,6 +13,10 @@ const getProductDBbyId = async(req,res)=>{
     const product = await prisma.product.findFirst({
       where:{
         id
+      },
+      include:{
+        categories:true,
+        images:true
       }
     })
 
@@ -104,7 +108,8 @@ const createProduct = async(req,res,next)=>{
      title,
      description ,
      stock,
-     price 
+     price,
+     category_ids 
   } =req.body
 
   const product = await prisma.product.findFirst({
@@ -114,12 +119,24 @@ const createProduct = async(req,res,next)=>{
   })
   if(product) custom_Error("conflict,product exist with same title",409);
 
+  const Data = {
+    title,
+    description,
+    stock,
+    price,
+    ...(category_ids.length !== 0 && {
+    categories: {
+      connect: category_ids.map((id) => ({
+        id: Number(id)
+      }))
+    }
+  })
+  };
+
   const data = await prisma.product.create({
-    data:{
-      title,
-      description,
-      stock,
-      price
+    data:Data,
+    include:{
+      categories:true
     }
   })
 
@@ -130,6 +147,72 @@ const createProduct = async(req,res,next)=>{
 }
 
   
+
+}
+
+const addProduct_Category = async(req,res,next)=>{
+
+    try{
+        const {category_ids,product_id} = req.body;
+       
+        const product = await prisma.product.update({
+           where:{
+            id:product_id
+           },
+           data:{
+           categories:{
+           connect:category_ids.map((id)=>({
+             id:Number(id)
+           }))
+           }},
+           include:{
+            categories:true
+           }
+
+        })
+
+        res.status(200).json({
+            status:"success",
+            message:"product added to categories",
+            data:product
+        })
+
+    }catch(error){
+       next(error)
+    }
+
+}
+
+const deleteProduct_Category = async(req,res,next)=>{
+
+    try{
+        const {category_ids,product_id} = req.body;
+       
+        const product = await prisma.product.update({
+           where:{
+            id:product_id
+           },
+           data:{
+           categories:{
+           disconnect:category_ids.map((id)=>({
+             id:Number(id)
+           }))
+           }},
+           include:{
+            categories:true
+           }
+
+        })
+
+        res.status(200).json({
+            status:"success",
+            message:"product added to categories",
+            data:product
+        })
+
+    }catch(error){
+       next(error)
+    }
 
 }
 
@@ -206,6 +289,8 @@ const deleteProduct = async(req,res)=>{
 
 export default{
   createProduct,
+  addProduct_Category,
+  deleteProduct_Category,
   editProduct,
   deleteProduct,
   getAllProducts,

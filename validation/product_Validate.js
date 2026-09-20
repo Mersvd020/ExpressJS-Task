@@ -15,8 +15,12 @@ const createProduct_Validate = [
     ,
     body("stock")
     .isInt()
-    
+    ,
+    body("category_ids")
+    .optional()
+    .isArray()
 ]
+
 
 
 export default {
