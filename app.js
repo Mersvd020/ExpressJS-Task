@@ -10,6 +10,8 @@ import { globalError_Middleware } from "./middleware/error_Handling.js";
 const PORT = process.env.PORT;
 const app = express();
 
+app.use("/uploads/user",express.static("uploads/user"));
+app.use("/uploads/product",express.static("uploads/product"));
 app.use(express.json());
 
 

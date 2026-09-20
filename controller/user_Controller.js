@@ -111,29 +111,65 @@ const getAllUser = async(req,res)=>{
 
 const getUserById = async(req,res)=>{
     const {id} = req.params;
-    const data = await prsima.user.finFirst({
+
+    if(!id) custom_Error("bad request,id isn't valid",400);
+
+     const user = await prisma.user.findFirst({
         where:{
             id
+        },include:{
+            images:true,favorites:true
         }
-    })
+     })
 
-    res.json(data);
+    if(!user) custom_Error("user not found",404);
+
+    res.status(200).json({status:"success",message:"user found",data:user});;
 }
 
 const editUser = async(req,res)=>{
 
 }
 
-const deleteUser = async(req,res)=>{
-     const {id} = req.params;
+const deleteUser = async(req,res,next)=>{
 
-     const data = await prisma.user.delete({
+    try{
+     const {id} = req.params;
+    if(!id) custom_Error("bad request,id isn't valid",400);
+
+     const user = await prisma.user.findFirst({
         where:{
             id
         }
      })
 
-     res.json({data});
+     if(!user) custom_Error("user not found",404);
+
+     const userImage = await prisma.userImage.deleteMany({
+        where:{
+            user_id:id
+        }
+     })
+
+     const favorite = await prisma.favorite.deleteMany({
+        where:{
+            user_id:id
+        }
+     })
+
+     const theUser = await prisma.user.delete({
+        where:{
+            id
+        },include:{
+            images:true,favorites:true
+        }
+     })
+
+
+     res.status(200).json({status:"success",message:"user and user's info removed completely",data:theUser});
+    }catch(error){
+        next(error)
+    }
 }
 
 

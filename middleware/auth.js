@@ -3,7 +3,7 @@ import {custom_Error} from "../middleware/error_Handling.js"
 
 
 
-const auth_middlware = (req,res,next,role="user")=>{
+const auth_middlware = (req,res,next,role)=>{
 
 
     //  console.log("auth",req.headers.authorization);
@@ -17,7 +17,9 @@ const auth_middlware = (req,res,next,role="user")=>{
     const checkToken = JWT.verify_Token(token);
     if(!checkToken)  custom_Error("the token is expired or invalid",401);
 
-    if(checkToken.role !== role) custom_Error("you dont have premission",401);
+    if(role){
+     if(checkToken.role !== role) custom_Error("you dont have premission",401);
+    }
 
     req.user = checkToken
 
@@ -26,7 +28,7 @@ const auth_middlware = (req,res,next,role="user")=>{
 }
 
 const auth_admin_middlware = (req,res,next)=> auth_middlware(req,res,next,"admin");
-
+const auth_user_middlware = (req,res,next)=> auth_middlware(req,res,"user");
 
 
 const checkAuthorization = (req,res,next,role)=>{
@@ -72,5 +74,6 @@ const checkAuth = (req,res,next)=>{
 
 export {
     auth_admin_middlware,
+    auth_user_middlware,
     auth_middlware
 };

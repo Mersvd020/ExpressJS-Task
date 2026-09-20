@@ -8,6 +8,10 @@ import catValidation from "../validation/category_Validate.js";
 import { auth_middlware,auth_admin_middlware } from "../middleware/auth.js";
 import product_Controller from "../controller/product_Controller.js";
 
+import { productImage_Uploader } from "../util/image.util.js";
+
+import image_Controller from "../controller/image_Controller.js";
+
 
 product_Route.get("/",Product_Controller.getAllProducts);
 
@@ -24,6 +28,14 @@ product_Route.patch("/deletecategory",validate(catValidation.category_Validate),
 //
 
 product_Route.delete("/:id",[auth_admin_middlware],Product_Controller.deleteProduct);
+
+///image
+
+product_Route.get("/:id/image",[auth_admin_middlware],image_Controller.getProductImage);
+
+product_Route.post("/:id/image",[auth_admin_middlware],productImage_Uploader.array("productImages",10),image_Controller.uploadProductImages);
+
+product_Route.delete("/:product_id/image/:imageId",[auth_admin_middlware],image_Controller.deleteProductImage);
 
 
 export {product_Route};
