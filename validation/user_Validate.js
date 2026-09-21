@@ -29,8 +29,7 @@ const userLogin_Validate = [
 
 const userEditInfo_Validate = [
     body("userName")
-    .optional()
-    .isString()
+    .isString().withMessage("must be string")
     .isLength({min:5}).withMessage("userName must be at least 5 characters")
     
 ]
@@ -40,5 +39,6 @@ const userEditInfo_Validate = [
 
 export default {
     userLogin_Validate,
-    userRegister_Validate
+    userRegister_Validate,
+    userEditInfo_Validate
 };

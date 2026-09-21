@@ -154,6 +154,13 @@ const addProduct_Category = async(req,res,next)=>{
 
     try{
         const {category_ids,product_id} = req.body;
+
+        const theproduct = await prisma.product.findFirst({
+          where:{
+            id:product_id
+          }
+        })
+        if(!theproduct) custom_Error("product not found",404);
        
         const product = await prisma.product.update({
            where:{
@@ -304,6 +311,13 @@ const addProduct_favorite = async(req,res,next)=>{
 
     if(!user) custom_Error("user not found",404);
 
+    const product = await prisma.product.findFirst({
+      where:{
+        id:product_id
+      }
+    })
+    if(!product) custom_Error("product not found",404);
+
     const theFavorite = await prisma.favorite.findFirst({
       where:{
         user_id,
@@ -371,7 +385,7 @@ const deleteProduct_favorite = async(req,res,next)=>{
     }
   })
 
-  if(!favorite) custom_Error("favorite not found",404);
+  if(!favorite) custom_Error("the product not in favorite list",409);
 
   const theFavorite = await prisma.favorite.delete({
     where:{

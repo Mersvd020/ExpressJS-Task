@@ -84,17 +84,17 @@ const loginUser = async(req,res,next)=>{
 
 ///admin
 
-const verifyToken = (req,res)=>{
+// const verifyToken = (req,res)=>{
 
-    let token =req.headers.authorization;
-    token = token?.split(" ")[1];
-    if(!token) custom_Error("auhorization failed",401);
+//     let token =req.headers.authorization;
+//     token = token?.split(" ")[1];
+//     if(!token) custom_Error("auhorization failed",401);
 
-    const checkToken = JWT.verify_Token(token);
-    if(!checkToken) custom_Error("token is expired or invalid",401);
+//     const checkToken = JWT.verify_Token(token);
+//     if(!checkToken) custom_Error("token is expired or invalid",401);
 
-    res.status(200).json({status:"success",message:"token verified",data:checkToken});
-}
+//     res.status(200).json({status:"success",message:"token verified",data:checkToken});
+// }
 
 
 
@@ -252,7 +252,7 @@ const changeRole_admin = (req,res,next)=> changeRole(req,res,next,"admin");
 
 
 export default {
-    verifyToken,
+    // verifyToken,
     getAllUser,
     getUserById,
     createUser,

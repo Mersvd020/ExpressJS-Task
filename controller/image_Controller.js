@@ -77,12 +77,17 @@ const deleteUserImage = async (req, res, next) => {
     const { user_id,imageId } = req.params;
     if(!imageId || !user_id) custom_Error("bad request,imageId or user_id isn't valid",400);
 
+    
+
     const deleted = await prisma.userImage.delete({
       where:{
          id: Number(imageId),
          user_id:user_id
       }
     });
+
+    if(!deleted) custom_Error("image or user not found",404);
+
     res.status(200).json({ status: "success",message:"image deleted",data:deleted });
   } catch (error) {
     next(error);

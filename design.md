@@ -70,7 +70,7 @@
 |
 |-data (database folder)
 |  |
-|  |_dev.db
+|  |_data.db
 |
 |-middleware
 |   |

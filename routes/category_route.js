@@ -8,11 +8,11 @@ import {auth_admin_middlware } from "../middleware/auth.js";
 
 //admin
 
-category_Route.post("/",category_Controller.createCategory);
+category_Route.post("/",[auth_admin_middlware],category_Controller.createCategory);
 
-category_Route.put("/:id",category_Controller.editCategory);
+category_Route.put("/:id",[auth_admin_middlware],category_Controller.editCategory);
 
-category_Route.delete("/:id",category_Controller.deleteCategory);
+category_Route.delete("/:id",[auth_admin_middlware],category_Controller.deleteCategory);
 
 //user /admin
 

@@ -1,0 +1,1141 @@
+{
+	"info": {
+		"_postman_id": "f5b116ca-fe08-41c5-a779-d0772846f53b",
+		"name": "E-commerce Task",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "49187642",
+		"_collection_link": "https://www.postman.com/mosaybimersvd020-6774566/workspace/e-commerce-task/collection/49187642-f5b116ca-fe08-41c5-a779-d0772846f53b?action=share&source=collection_link&creator=49187642"
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "role",
+					"item": [
+						{
+							"name": "roleAdmin",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/user/:id/roleAdmin",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"user",
+										":id",
+										"roleAdmin"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": "",
+											"disabled": true
+										}
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "bbe0cbdf-8f27-4575-929a-e8842d85dfb0"
+										}
+									]
+								},
+								"description": "change role to admin\n\nauthorization : (needed role user)\n\nstatusCode:\n\n- 200 (success role change to admin)\n    \n- 404 (user not found)\n    \n- 409 (conflict ,you are admin now)\n    \n- 401 (not authorized , need to login)\n    \n- 500 (server error)"
+							},
+							"response": []
+						},
+						{
+							"name": "roleUser",
+							"request": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "",
+										"value": "",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{base_url}}/user/:id/roleUser",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"user",
+										":id",
+										"roleUser"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "bbe0cbdf-8f27-4575-929a-e8842d85dfb0"
+										}
+									]
+								},
+								"description": "change role to admin\n\nauthorization : (needed role admin)\n\nstatusCode:\n\n- 200 (success role change to admin)\n    \n- 404 (user not found)\n    \n- 409 (conflict ,you are user now)\n    \n- 401 (not authorized , need to login)\n    \n- 500 (server error)"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "admin",
+					"item": [
+						{
+							"name": "getAllUser",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/user",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"user"
+									]
+								},
+								"description": "get all Users;\n\nauthorization : (admin)\n\nresponse:\n\n- 200 (success)\n    \n- 500 (server error)"
+							},
+							"response": []
+						},
+						{
+							"name": "deleteUser",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{base_url}}/user/delete/:id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"user",
+										"delete",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "b6a6d5a6-4394-46c1-8894-dd82f0f72e95"
+										}
+									]
+								},
+								"description": "delete user by id:\n\nauthorization : (admin)\n\nparams:\n\n- id (user id string)\n    \n\nresponse:\n\n- 200 (success)\n    \n- 404 (user not found)\n    \n- 400 (user id isn't valid)\n    \n- 500 (server error)"
+							},
+							"response": []
+						},
+						{
+							"name": "getUserById",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/user/:id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"user",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "b6a6d5a6-4394-46c1-8894-dd82f0f72e95"
+										}
+									]
+								},
+								"description": "get user by id;\n\nauthorization : (admin)\n\nparams:\n\n- id (user id string)\n    \n\nresponse:\n\n- 200 (success)\n    \n- 404 (user not found)\n    \n- 400 (bad request,invalid id)\n    \n- 500 (server error)"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\" : \"mersadTest\",\r\n    \"email\" : \"Test@gmail.com\",\r\n    \"password\" : \"20201234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"register"
+							]
+						},
+						"description": "create a new user .\n\nauthentication: (no need)\n\nRequest Body:\n\n- userName : string,\n    \n- email :string (valid email : @gmail.com),\n    \n- password : string\n    \n\nresponse :\n\n- 201 ( user is created)\n    \n- 400 ( bad request , invalid email or username exist)\n    \n- 409 ( conflict , user with username or email exist)\n    \n- 500 (server error)"
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"mersad@gmail.com\",\r\n    \"password\" : \"123456782\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"login"
+							]
+						},
+						"description": "login user .\n\nauthentication: (no need)\n\nRequest Body:\n\n- email :string (valid email : @gmail.com),\n    \n- password : string\n    \n\nresponse :\n\n- 200 (success)\n    \n- 400 ( bad request , invalid email or password)\n    \n- 500 (server error)"
+					},
+					"response": []
+				},
+				{
+					"name": "userImageUploader",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "userImages",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/user/:id/image",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								":id",
+								"image"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "user_id"
+								}
+							]
+						},
+						"description": "upload images for user;\n\nauthorization : (no need)\n\nauthentication : (needed)\n\nform-data:\n\n- userImages (limit 5 images)\n    \n\nresponse:\n\n- 201 (image added)\n    \n- 400 (bad request,no images or invalid id)\n    \n- 404( user not found)\n    \n- 500 (server error)"
+					},
+					"response": []
+				},
+				{
+					"name": "deleteUserImage",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/:user_id/image/:imageId",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								":user_id",
+								"image",
+								":imageId"
+							],
+							"variable": [
+								{
+									"key": "user_id",
+									"value": "bbe0cbdf-8f27-4575-929a-e8842d85dfb0"
+								},
+								{
+									"key": "imageId",
+									"value": "3"
+								}
+							]
+						},
+						"description": "delete user image by imageId;\n\nauthorization : (no need )\n\nauthentication : (needed)\n\nparams:\n\n- user_id (string)\n    \n- imageId (Number)\n    \n\nresponse:\n\n- 200 (success)\n    \n- 400 (bad request,invalid id)\n    \n- 404( user not found or image not found)\n    \n- 500 (server error)"
+					},
+					"response": []
+				},
+				{
+					"name": "getUserImage",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/user/:id/image",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								":id",
+								"image"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "bbe0cbdf-8f27-4575-929a-e8842d85dfb0"
+								}
+							]
+						},
+						"description": "get userImages by user id;\n\nauthorization : (no need)\n\nauthentication : (needed)\n\nparams:\n\n- id (user_id string)\n    \n\nresponse:\n\n- 200 (success)\n    \n- 400 (bad request,invalid id)\n    \n- 404( user not found)\n    \n- 500 (server error)"
+					},
+					"response": []
+				},
+				{
+					"name": "getAllUserImage",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/user/images",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								"images"
+							]
+						},
+						"description": "get all user Images;\n\nauthorization : (admin)\n\nresponse:\n\n- 200 (success)\n    \n- 404(no image found)\n    \n- 500 (server error)"
+					},
+					"response": []
+				},
+				{
+					"name": "editUserInfo",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\":\"mersad_m\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/user/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"user",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "bbe0cbdf-8f27-4575-929a-e8842d85dfb0"
+								}
+							]
+						},
+						"description": "edit userName (just:);\n\nauthorization : (no need)\n\nauthentication : (needed)\n\nbody:\n\n- userName (string at least 5 chars)"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "product",
+			"item": [
+				{
+					"name": "admin",
+					"item": [
+						{
+							"name": "category",
+							"item": [
+								{
+									"name": "createCategory",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"name\":\"apple\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base_url}}/category",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"category"
+											]
+										},
+										"description": "create category;\n\nauthorization : (admin)\n\nbody:\n\n- name : string\n    \n\nresponse:\n\n- 201 (created)\n    \n- 409 (conflict , category exist with this name)\n    \n- 400 (bad request , name isn't valid)\n    \n- 500 (server error)"
+									},
+									"response": []
+								},
+								{
+									"name": "editCategory",
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"name\":\"string\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base_url}}/category/:id",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"category",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "category id"
+												}
+											]
+										},
+										"description": "edit category;\n\nauthorization : (admin)\n\nparams:\n\n- id (category id Number)\n    \n\nbody:\n\n- name : string\n    \n\nresponse:\n\n- 200 (success)\n    \n- 404 (not found)\n    \n- 409 (conflict , category exist with this name)\n    \n- 400 (bad request , name isn't valid)\n    \n- 500 (server error)"
+									},
+									"response": []
+								},
+								{
+									"name": "deleteCategory",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base_url}}/category/:id",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"category",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "category id"
+												}
+											]
+										},
+										"description": "delete category;\n\nauthorization : (admin)\n\nparams:\n\n- id (category id Number)\n    \n\nresponse:\n\n- 200 (success)\n    \n- 400 (bad request , id isn't valid)\n    \n- 404 (not found)\n    \n- 500 (server error)"
+									},
+									"response": []
+								},
+								{
+									"name": "addProductCategories",
+									"request": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"product_id\":\"c04affd8-d4bf-406a-953b-389d7a670797\",\r\n    \"category_ids\":[4]\r\n\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base_url}}/product/addcategory",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"product",
+												"addcategory"
+											]
+										},
+										"description": "add product to category:\n\nauthorization : (admin)\n\nbody:\n\n- product_id (string)\n    \n- category_ids (Array,Number\\[\\])\n    \n\nresponse:\n\n- 200 (success)\n    \n- 400 (bad request, product id or category ids isn't valid)\n    \n- 404 (product not found)\n    \n- 500 (server error)"
+									},
+									"response": []
+								},
+								{
+									"name": "deleteProductCategories",
+									"request": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"product_id\":\"a10d5209-cf85-4145-8d3f-4cc28d386f85\",\r\n    \"category_ids\":[5]\r\n\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base_url}}/product/deletecategory",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"product",
+												"deletecategory"
+											]
+										},
+										"description": "delete product from category:\n\nauthorization : (admin)\n\nbody:\n\n- product_id (string)\n    \n- category_ids (Array,Number\\[\\])\n    \n\nresponse:\n\n- 200 (success)\n    \n- 400 (bad request, product id or category ids isn't valid)\n    \n- 404 (product not found)\n    \n- 500 (server error)"
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "createProduct",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\":\"testwda\",\r\n    \"description\":\"mackbook air m5 chipset,ssd :512GB , ram : 16Gb\",\r\n    \"price\" : 20000,\r\n    \"stock\" : 7,\r\n    \"category_ids\":[]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/product",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"product"
+									]
+								},
+								"description": "create new product\n\nauthorization : admin\n\nbody:\n\n- title :string\n    \n- description : string\n    \n- price : number\n    \n- stock : number (number of product)\n    \n- category_ids (Array,Number\\[\\] ,Optional)\n    \n\nresponse:\n\n- 201 (created)\n    \n- 400 (bad request,invalid input)\n    \n- 409 (conflict , product exist with same title)\n    \n- 500 (server error)"
+							},
+							"response": []
+						},
+						{
+							"name": "editProduct",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\":\"iphone 13 normal\",\r\n    \"description\":\"iphone 13 normal 128gb battery health 83%\",\r\n    \"price\" : 20000,\r\n    \"stock\" : 2\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/product/:id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"product",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "a10d5209-cf85-4145-8d3f-4cc28d386f85"
+										}
+									]
+								},
+								"description": "edit the product\n\nauthorization : admin\n\nparams:\n\n- id (product id string)\n    \n\nbody:\n\n- title :string\n    \n- description : string\n    \n- price : number\n    \n- stock : number (number of product)\n    \n\nresponse:\n\n- 200 (success)\n    \n- 400 (bad request,invalid input)\n    \n- 500 (server error)"
+							},
+							"response": []
+						},
+						{
+							"name": "deleteProduct",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/product/:id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"product",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "e19a5944-648e-4129-b9ec-3899387b1919"
+										}
+									]
+								},
+								"description": "remove the product\n\nauthorization : admin\n\nresponse:\n\n- 200 (success)\n    \n- 400 (bad request,invalid input)\n    \n- 404 (product not found)\n    \n- 500 (server error)"
+							},
+							"response": []
+						},
+						{
+							"name": "productUploadImage",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "productImages",
+											"type": "file",
+											"src": []
+										}
+									]
+								},
+								"url": {
+									"raw": "{{base_url}}/product/:id/image",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"product",
+										":id",
+										"image"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "c04affd8-d4bf-406a-953b-389d7a670797"
+										}
+									]
+								},
+								"description": "upload images for product:\n\nauhtorization : (admin)\n\nparams:\n\n- id (product id string)\n    \n\nform-data:\n\n- productImages (limit 10 images)\n    \n\nresponse:\n\n- 200 (success)\n    \n- 400 (bad request or image or id invalid)\n    \n- 404 (product not found)\n    \n- 500 (server error)"
+							},
+							"response": []
+						},
+						{
+							"name": "deleteProductImage",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/product/:product_id/image/:imageId",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"product",
+										":product_id",
+										"image",
+										":imageId"
+									],
+									"variable": [
+										{
+											"key": "product_id",
+											"value": "c04affd8-d4bf-406a-953b-389d7a670797"
+										},
+										{
+											"key": "imageId",
+											"value": "2"
+										}
+									]
+								},
+								"description": "delete product image by imageId;\n\nauthorization : (admin)\n\nparams:\n\n- product_id (string)\n    \n- imageId (Number)\n    \n\nresponse:\n\n- 200 (success)\n    \n- 400 (bad request,invalid id)\n    \n- 404( product not found or image not found)\n    \n- 500 (server error)"
+							},
+							"response": []
+						},
+						{
+							"name": "getProductImage",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/product/:id/image",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"product",
+										":id",
+										"image"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "c04affd8-d4bf-406a-953b-389d7a670797"
+										}
+									]
+								},
+								"description": "get userImages by user id;\n\nauthorization : (admin)\n\nparams:\n\n- id (product_id string)\n    \n\nresponse:\n\n- 200 (success)\n    \n- 400 (bad request,invalid id)\n    \n- 404( product not found)\n    \n- 500 (server error)"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "category",
+					"item": [
+						{
+							"name": "getAllCategories",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/category",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"category"
+									],
+									"query": [
+										{
+											"key": "search",
+											"value": "string",
+											"disabled": true
+										}
+									]
+								},
+								"description": "get all categories with search;\n\nauthorization : (no need)\n\nauthentication:(no need)\n\nquery:\n\n- search\n    \n- sort : products\n    \n- order : (default asc)\n    \n\nresponse:\n\n- 200 (success)\n    \n- 404 (not found)\n    \n- 400 (bad request , name isn't valid)\n    \n- 500 (server error)"
+							},
+							"response": []
+						},
+						{
+							"name": "getCategoryById",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/category/:id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"category",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								},
+								"description": "get category by id;\n\nauthorization : (no need)\n\nauthentication: (no need)\n\nresponse:\n\n- 200 (success)\n    \n- 404 (not found)\n    \n- 400 (bad request , id isn't valid)\n    \n- 500 (server error)"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "favorite",
+					"item": [
+						{
+							"name": "addProductFavorite",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/product/:product_id/user/:user_id/favorite",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"product",
+										":product_id",
+										"user",
+										":user_id",
+										"favorite"
+									],
+									"variable": [
+										{
+											"key": "product_id",
+											"value": "c04affd8-d4bf-406a-953b-389d7a670797"
+										},
+										{
+											"key": "user_id",
+											"value": "b6a6d5a6-4394-46c1-8894-dd82f0f72e95"
+										}
+									]
+								},
+								"description": "add product to favorite:\n\nauthorization : (no need)\n\nauthentication : (needed)\n\nparams:\n\n- product_id (string)\n    \n- user_id (string)\n    \n\nresponse:\n\n- 200 (success)\n    \n- 400 (bad request)\n    \n- 404 (user or product not found)\n    \n- 409 (conflict , product favorite before)\n    \n- 500 (server error)"
+							},
+							"response": []
+						},
+						{
+							"name": "deleteProductFavorite",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/product/:product_id/user/:user_id/favorite",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"product",
+										":product_id",
+										"user",
+										":user_id",
+										"favorite"
+									],
+									"variable": [
+										{
+											"key": "product_id",
+											"value": "c04affd8-d4bf-406a-953b-389d7a670797"
+										},
+										{
+											"key": "user_id",
+											"value": "bbe0cbdf-8f27-4575-929a-e8842d85dfb0"
+										}
+									]
+								},
+								"description": "remove product from your favorite:\n\nauthorization : (no need)\n\nauthentication : (needed)\n\nparams:\n\n- product_id (string)\n    \n- user_id (string)\n    \n\nresponse:\n\n- 200 (success)\n    \n- 400 (bad request)\n    \n- 404 (user or product not found)\n    \n- 409 (conflict , product not in favorite list)\n    \n- 500 (server error)"
+							},
+							"response": []
+						},
+						{
+							"name": "getFavorite",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/product/user/:id/favorite",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"product",
+										"user",
+										":id",
+										"favorite"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "b6a6d5a6-4394-46c1-8894-dd82f0f72e95"
+										}
+									]
+								},
+								"description": "get user favorite list:\n\nauthorization : (no need)\n\nauthentication: (needed)\n\nparams:\n\n- id (user id string)\n    \n\nresponse:\n\n- 200 (success)\n    \n- 400(bad request,invalid id)\n    \n- 404( user not found)\n    \n- 500 (server error)"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "getAllProduct",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/product?page=1&limit=10&sort=price&order=asc",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"product"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "sort",
+									"value": "price"
+								},
+								{
+									"key": "order",
+									"value": "asc"
+								},
+								{
+									"key": "minPrice",
+									"value": "10000",
+									"disabled": true
+								},
+								{
+									"key": "maxPrice",
+									"value": "1000000",
+									"disabled": true
+								},
+								{
+									"key": "search",
+									"value": "",
+									"disabled": true
+								}
+							]
+						},
+						"description": "getAllProduct with pagination\n\nauthorization : (no need)\n\nquery:\n\n- page : default 1\n    \n- limit : default 10\n    \n- sort : price\n    \n- order : asc or desc\n    \n- minPrice\n    \n- maxPrice\n    \n- search : search by title\n    \n\nresponse :\n\n- 200 sucess\n    \n- 500 server error"
+					},
+					"response": []
+				},
+				{
+					"name": "getProductById",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/product/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"product",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "c04affd8-d4bf-406a-953b-389d7a670797"
+								}
+							]
+						},
+						"description": "get product by id;\n\nauthorization : (no need)\n\nparams:\n\n- id (product id string)\n    \n\nresponse:\n\n- 200 (success)\n    \n- 400 (bad request,invalid id)\n    \n- 404 (not found)\n    \n- 500 (server error)"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{Token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": ""
+		},
+		{
+			"key": "Token",
+			"value": ""
+		}
+	]
+}
