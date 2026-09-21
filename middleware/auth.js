@@ -28,7 +28,7 @@ const auth_middlware = (req,res,next,role)=>{
 }
 
 const auth_admin_middlware = (req,res,next)=> auth_middlware(req,res,next,"admin");
-const auth_user_middlware = (req,res,next)=> auth_middlware(req,res,"user");
+const auth_user_middlware = (req,res,next)=> auth_middlware(req,res,next,"user");
 
 
 const checkAuthorization = (req,res,next,role)=>{

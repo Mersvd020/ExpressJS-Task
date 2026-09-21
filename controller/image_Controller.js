@@ -18,15 +18,15 @@ const getUserImage = async(req,res,next)=>{
 }
 
 const getAllUserImage = async(req,res,next)=>{
-   
+    try{
+        const userImages = await prisma.userImage.findMany({});
 
-    const userImages = await prisma.userImage.findMany({
-        
-    })
+        if(!userImages.length) custom_Error("no image found",404);
 
-    if(!userImages) custom_Error("no image found",404);
-
-    res.status(200).json({status:"success",message:"image found successfully",data:userImages});
+        res.status(200).json({status:"success",message:"image found successfully",data:userImages});
+    }catch(error){
+        next(error);
+    }
 }
 
 const uploadUserImages = async (req, res, next) => {

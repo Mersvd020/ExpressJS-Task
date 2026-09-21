@@ -37,5 +37,13 @@ product_Route.post("/:id/image",[auth_admin_middlware],productImage_Uploader.arr
 
 product_Route.delete("/:product_id/image/:imageId",[auth_admin_middlware],image_Controller.deleteProductImage);
 
+//favorite
+
+product_Route.post("/:product_id/user/:user_id/favorite",[auth_middlware],product_Controller.addProduct_favorite);
+
+product_Route.get("/user/:id/favorite",[auth_middlware],product_Controller.getUser_Favorite);
+
+product_Route.delete("/:product_id/user/:user_id/favorite",[auth_middlware],product_Controller.deleteProduct_favorite);
+
 
 export {product_Route};

@@ -14,7 +14,6 @@ const createUser = async(req,res,next)=>{
     const user = await prisma.user.findFirst({
         where:{
            email,
-          userName
         }
     })
 
@@ -104,7 +103,9 @@ const getAllUser = async(req,res)=>{
         include:{
             images:true,
             favorites:true,
-        }
+        },omit:{
+        password:true
+       }
     }); 
     res.status(200).json(data);
 }
@@ -119,6 +120,8 @@ const getUserById = async(req,res)=>{
             id
         },include:{
             images:true,favorites:true
+        }, omit:{
+          password:true
         }
      })
 
@@ -127,7 +130,31 @@ const getUserById = async(req,res)=>{
     res.status(200).json({status:"success",message:"user found",data:user});;
 }
 
-const editUser = async(req,res)=>{
+const editUserInfo = async(req,res,next)=>{
+
+    try{
+    const {id} =req.params;
+    const {userName} = req.body;
+
+    if(!id) custom_Error("bad request,id isn't valid",400);
+    
+    const theUser = await prisma.user.update({
+        where:{
+            id
+        },
+        data:{
+            userName,
+        },omit:{
+            password:true
+        }
+    })
+
+    if(!theUser) custom_Error("user not found",404);
+
+    res.status(200).json({status:"success",message:"user info edited",data:theUser});
+}catch(error){
+    next(error)
+}
 
 }
 
@@ -162,7 +189,9 @@ const deleteUser = async(req,res,next)=>{
             id
         },include:{
             images:true,favorites:true
-        }
+        }, omit:{
+          password:true
+         }
      })
 
 
@@ -228,7 +257,7 @@ export default {
     getUserById,
     createUser,
     loginUser,
-    editUser,
+    editUserInfo,
     deleteUser,
     changeRole_user,
     changeRole_admin

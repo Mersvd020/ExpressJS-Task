@@ -286,6 +286,105 @@ const deleteProduct = async(req,res)=>{
 }
 
 
+//favorite
+
+const addProduct_favorite = async(req,res,next)=>{
+
+  try{
+     
+  const {product_id,user_id} = req.params;
+  
+  if(!product_id || !user_id) custom_Error("bad request,product or user id isn't valid",400);
+
+  const user = await prisma.user.findFirst({
+      where:{
+        id:user_id
+      }
+    })
+
+    if(!user) custom_Error("user not found",404);
+
+    const theFavorite = await prisma.favorite.findFirst({
+      where:{
+        user_id,
+        product_id
+      }
+    })
+
+    if(theFavorite) custom_Error("this product added to favorited",409);
+
+  const favorite = await prisma.favorite.create({
+    data:{
+      user_id,
+      product_id
+    },include:{
+      product:true
+    }
+  })
+
+  res.status(200).json({status:"success",message:"product be favorite",data:favorite});
+}catch(error){
+  next(error)
+}
+
+}
+
+const getUser_Favorite =async(req,res,next)=>{
+   try{
+    const {id} = req.params;
+   
+    if(!id) custom_Error("bad request,id isn't valid",400);
+
+    const user = await prisma.user.findFirst({
+      where:{
+        id
+      }
+    })
+
+    if(!user) custom_Error("user not found",404);
+
+    const favorite = await prisma.favorite.findMany({
+      where:{
+        user_id:id
+      },include:{
+        product:true
+      }
+    })
+
+    res.status(200).json({status:"success",message:"favorite result:",data:favorite})
+   }catch(error){
+    next(error)
+   }
+}
+
+const deleteProduct_favorite = async(req,res,next)=>{
+
+  try{
+     const {product_id,user_id} = req.params;
+  
+  if(!product_id || !user_id) custom_Error("bad request,product or user id isn't valid",400);
+
+  const favorite = await prisma.favorite.findFirst({
+    where:{
+      product_id,
+      user_id
+    }
+  })
+
+  if(!favorite) custom_Error("favorite not found",404);
+
+  const theFavorite = await prisma.favorite.delete({
+    where:{
+      id:favorite.id
+    }
+  })
+
+  res.status(200).json({status:"success",message:"favorite removed",data:theFavorite});
+}catch(error){
+  next(error)
+}
+}
+
 
 export default{
   createProduct,
@@ -295,5 +394,9 @@ export default{
   deleteProduct,
   getAllProducts,
   getProductDBbyId,
+
+  getUser_Favorite,
+  deleteProduct_favorite,
+  addProduct_favorite
   
 }

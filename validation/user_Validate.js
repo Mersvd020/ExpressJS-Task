@@ -27,6 +27,14 @@ const userLogin_Validate = [
     
 ]
 
+const userEditInfo_Validate = [
+    body("userName")
+    .optional()
+    .isString()
+    .isLength({min:5}).withMessage("userName must be at least 5 characters")
+    
+]
+
 
 
 
