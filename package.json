@@ -5,7 +5,6 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build" : "prisma generate",
     "start": "node app.js",
     "dev": "nodemon app.js"
   },
@@ -24,11 +23,5 @@
     "multer": "^2.4.0",
     "nodemon": "^3.1.14",
     "prisma": "^7.10.0"
-  },
-  "allowScripts": {
-    "bcrypt@6.0.0": true,
-    "better-sqlite3@12.11.1": true,
-    "prisma@7.10.0": true,
-    "@prisma/engines@7.10.0": true
   }
 }
